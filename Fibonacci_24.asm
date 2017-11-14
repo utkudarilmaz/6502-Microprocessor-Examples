@@ -2,12 +2,12 @@
 	.BYTE 01,01				;$0300 Low tarafi, $0301 High tarafi temsil ediyor
 
 	.DATA $20				;HIGH biti hesaplarken kullanilan bellek alanlari ve sayac
-	.BYTE $00,$00,22		;$22 adresindeki sayi Fibonacci dizisindeki bulmak istenilen elemanin 2 eksigi yani ($22+2). eleman
+	.BYTE $00,$00,22			;$22 adresindeki sayi Fibonacci dizisindeki bulmak istenilen elemanin 2 eksigi yani ($22+2). eleman
 
 	.CODE $0200
 
 		CLC
-BASLA	LDY #01				;Arka arakaya olan dizi terimlerini toplamak icin kullanilan sayilar
+BASLA	LDY #01					;Arka arakaya olan dizi terimlerini toplamak icin kullanilan sayilar
 		LDX #00
 
 ARA		LDA $0300,X			;A'ya kucuk sayi atama yapildi
@@ -36,7 +36,7 @@ TASMA	CLC					;Onceki islemden kalma C bayragini islemlere etki etmemesi icin si
 		LDX #00				;X kaydedicisini yukaridaki islemlerde kullanmaya devam edebilmek icin eski degerine donduruldu
 		JMP DEVAM			;DEVAM etiketine dalindi
 
-TASYOK	LDA $20				;TASMA etiketindeki islemleri HIGH bitini arttirma islemi disinda tekrarlandi
+TASYOK	LDA $20					;TASMA etiketindeki islemleri HIGH bitini arttirma islemi disinda tekrarlandi
 		ADC $21				;Boylece tasma olmasa bile HIGH bitleri de dizi elemanlari ile birlikte toplanabilecek
 		LDX $21
 		STA $21
