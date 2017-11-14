@@ -1,13 +1,13 @@
-	.DATA $0300				;Calisilan bellek alani
-	.BYTE 01,01				;$0300 Low tarafi, $0301 High tarafi temsil ediyor
+		.DATA $0300			;Calisilan bellek alani
+		.BYTE 01,01			;$0300 Low tarafi, $0301 High tarafi temsil ediyor
 
-	.DATA $20				;HIGH biti hesaplarken kullanilan bellek alanlari ve sayac
-	.BYTE $00,$00,22			;$22 adresindeki sayi Fibonacci dizisindeki bulmak istenilen elemanin 2 eksigi yani ($22+2). eleman
+		.DATA $20			;HIGH biti hesaplarken kullanilan bellek alanlari ve sayac
+		.BYTE $00,$00,22		;$22 adresindeki sayi Fibonacci dizisindeki bulmak istenilen elemanin 2 eksigi yani ($22+2). eleman
 
-	.CODE $0200
+		.CODE $0200
 
 		CLC
-BASLA	LDY #01					;Arka arakaya olan dizi terimlerini toplamak icin kullanilan sayilar
+BASLA		LDY #01				;Arka arakaya olan dizi terimlerini toplamak icin kullanilan sayilar
 		LDX #00
 
 ARA		LDA $0300,X			;A'ya kucuk sayi atama yapildi
@@ -16,7 +16,7 @@ ARA		LDA $0300,X			;A'ya kucuk sayi atama yapildi
 		BCS TASMA			;Eger C bayragi 1 ise TASMA etiketine sapilacak, 0 ise TASYOK etiketine sapilacak
 		BCC TASYOK
 
-DEVAM	CLC					;Onceki islemden kalma C bayragi bilgisi temizlendi
+DEVAM		CLC				;Onceki islemden kalma C bayragi bilgisi temizlendi
 		LDA $0300,Y			;Toplamasini yapilan buyuk sayiyi A'ya atip bir sonraki satirla, A'yi kucuk sayi kismina atildi
 		STA $0300,X
 		PLA		    		;Yigindan toplama islemi sonucunu cekerek bir sonraki satirla buyuk sayi kismina atildi
@@ -25,7 +25,7 @@ DEVAM	CLC					;Onceki islemden kalma C bayragi bilgisi temizlendi
 		BEQ SOR				;Eger sayac 0 ise SOR etiketine sapildi
 		JMP BASLA			;Sart saglanmadiysa dongunun basina dalindi
 
-TASMA	CLC					;Onceki islemden kalma C bayragini islemlere etki etmemesi icin sifirlandi
+TASMA		CLC				;Onceki islemden kalma C bayragini islemlere etki etmemesi icin sifirlandi
 		LDX $21				;$21 adresindeki degeri kaybetmemek icin X kaydedicisine atandi
 		INC $21				;Bu islemle beraber eger yukarida toplanan sayilarda tasma varsa, HIGH biti bir arttirildi
 		LDA $20				;Kucuk sayinin HIGH bitini A'ya atandi
@@ -36,7 +36,7 @@ TASMA	CLC					;Onceki islemden kalma C bayragini islemlere etki etmemesi icin si
 		LDX #00				;X kaydedicisini yukaridaki islemlerde kullanmaya devam edebilmek icin eski degerine donduruldu
 		JMP DEVAM			;DEVAM etiketine dalindi
 
-TASYOK	LDA $20					;TASMA etiketindeki islemleri HIGH bitini arttirma islemi disinda tekrarlandi
+TASYOK		LDA $20				;TASMA etiketindeki islemleri HIGH bitini arttirma islemi disinda tekrarlandi
 		ADC $21				;Boylece tasma olmasa bile HIGH bitleri de dizi elemanlari ile birlikte toplanabilecek
 		LDX $21
 		STA $21
