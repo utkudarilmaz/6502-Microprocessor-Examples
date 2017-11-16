@@ -1,3 +1,6 @@
+// Written by Utku Darilmaz
+// Contact adress: utkudarilmaz@gmail.com
+
 		.DATA $0300			;Calisilan bellek alani
 		.BYTE 01,01			;$0300 Low tarafi, $0301 High tarafi temsil ediyor
 
